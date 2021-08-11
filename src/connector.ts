@@ -3,7 +3,7 @@ import { createConnection } from 'typeorm'
 import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions'
 import { BaseConnector, Id, MnemonicKeyringModel, UNiDInvalidDataError, UNiDNotImplementedError } from '@unid/wallet-sdk-base-connector'
 import { Keyring } from './entities/keyring'
-import { getConfig } from './../ormconfig'
+import { getConfig } from './ormconfig'
 
 export class SqliteConnector extends BaseConnector<string> {
     /**
