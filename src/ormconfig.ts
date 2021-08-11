@@ -1,8 +1,8 @@
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
 import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions'
-import { AppConfig } from './src/config'
+import { AppConfig } from './config'
 import { ConnectionOptions } from 'typeorm-seeding'
-import { Entities } from './src/entities'
+import { Entities } from './entities'
 
 const logging  = AppConfig.ENABLE_DEBUGGING_SQL_QUERIES
 
