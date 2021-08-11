@@ -1,6 +1,23 @@
-import { Column, Entity } from 'typeorm'
+import { Column, Entity, ValueTransformer } from 'typeorm'
 import { Base } from './base'
 import { HexKeyPair } from '@unid/wallet-sdk-base-connector'
+
+const transformer: ValueTransformer = {
+    from: async (value) => {
+        try {
+            return JSON.parse(value)
+        } catch (err) {
+            return undefined
+        }
+    },
+    to: async (value) => {
+        try {
+            return JSON.stringify(value)
+        } catch (err) {
+            return undefined
+        }
+    },
+}
 
 @Entity({ name: 'keyrings' })
 export class Keyring extends Base {
@@ -10,27 +27,31 @@ export class Keyring extends Base {
     })
     did?: string
 
-    @Column('blob', {
+    @Column('text', {
         nullable: false,
         comment : '',
+        transformer: transformer,
     })
     sign!: HexKeyPair
 
-    @Column('blob', {
+    @Column('text', {
         nullable: false,
         comment : '',
+        transformer: transformer,
     })
     update!: HexKeyPair
 
-    @Column('blob', {
+    @Column('text', {
         nullable: false,
         comment : '',
+        transformer: transformer,
     })
     recovery!: HexKeyPair
 
-    @Column('blob', {
+    @Column('text', {
         nullable: false,
         comment : '',
+        transformer: transformer,
     })
     encrypt!: HexKeyPair
 
