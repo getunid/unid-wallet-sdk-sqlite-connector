@@ -1,8 +1,19 @@
-import { Connection } from 'typeorm'
+import "reflect-metadata";
+import { createConnection } from 'typeorm'
+import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions'
 import { BaseConnector, Id, MnemonicKeyringModel, UNiDInvalidDataError, UNiDNotImplementedError } from '@unid/wallet-sdk-base-connector'
 import { Keyring } from './entities/keyring'
+import { getConfig } from './../ormconfig'
 
-export class SqliteConnector extends BaseConnector<Connection> {
+export class SqliteConnector extends BaseConnector<string> {
+    /**
+     */
+    public async init() {
+        let config: SqliteConnectionOptions = getConfig(this.context.client)
+
+        await createConnection(config)
+    }
+
     /**
      * @param payload 
      * @returns

@@ -20,12 +20,6 @@ class AppConfigKlass {
 
     /**
      */
-    get DATABASE_PATH(): string {
-        return this.config('DATABASE_PATH', 'unid-sdk.sqlite3')
-    }
-
-    /**
-     */
     get ENABLE_DEBUGGING_SQL_QUERIES(): boolean {
         return ((this.config('ENABLE_DEBUGGING_SQL_QUERIES', 'false').toLowerCase()) === 'true')
     }
