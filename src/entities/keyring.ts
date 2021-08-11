@@ -3,14 +3,14 @@ import { Base } from './base'
 import { HexKeyPair } from '@unid/wallet-sdk-base-connector'
 
 const transformer: ValueTransformer = {
-    from: async (value) => {
+    from: (value) => {
         try {
             return JSON.parse(value)
         } catch (err) {
             return undefined
         }
     },
-    to: async (value) => {
+    to: (value) => {
         try {
             return JSON.stringify(value)
         } catch (err) {
