@@ -22,7 +22,7 @@ export class SqliteConnector extends BaseConnector<string> {
         const manager = getManager(CONNECTION_NAME)
 
         const encrypted = await this.encryptModel(payload)
-        const model  = Keyring.create(encrypted)
+        const model  = manager.create(Keyring, encrypted)
         const result = await manager.save(model)
 
         return Object.assign<Id<{}>, MnemonicKeyringModel>({ _id: result.id }, payload)
