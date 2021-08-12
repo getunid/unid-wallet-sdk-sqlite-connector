@@ -1,9 +1,9 @@
 import "reflect-metadata";
-import { createConnection } from 'typeorm'
+import { createConnection, getManager } from 'typeorm'
 import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions'
 import { BaseConnector, Id, MnemonicKeyringModel, UNiDInvalidDataError, UNiDNotImplementedError } from '@unid/wallet-sdk-base-connector'
 import { Keyring } from './entities/keyring'
-import { getConfig } from './ormconfig'
+import { CONNECTION_NAME, getConfig } from './ormconfig'
 
 export class SqliteConnector extends BaseConnector<string> {
     /**
@@ -19,9 +19,11 @@ export class SqliteConnector extends BaseConnector<string> {
      * @returns
      */
     async insert(payload: MnemonicKeyringModel): Promise<Id<MnemonicKeyringModel>> {
+        const manager = getManager(CONNECTION_NAME)
+
         const encrypted = await this.encryptModel(payload)
         const model  = Keyring.create(encrypted)
-        const result = await model.save()
+        const result = await manager.save(model)
 
         return Object.assign<Id<{}>, MnemonicKeyringModel>({ _id: result.id }, payload)
     }
@@ -32,8 +34,10 @@ export class SqliteConnector extends BaseConnector<string> {
      * @returns
      */
     async update(_id: string, payload: MnemonicKeyringModel): Promise<Id<MnemonicKeyringModel>> {
+        const manager = getManager(CONNECTION_NAME)
+
         const encrypted = await this.encryptModel(payload)
-        const model = await Keyring.findOne(_id)
+        const model = await manager.findOne(Keyring, _id)
 
         if (model === undefined) {
             throw new UNiDInvalidDataError()
@@ -47,7 +51,7 @@ export class SqliteConnector extends BaseConnector<string> {
         model.mnemonic = encrypted.mnemonic
         model.seed     = encrypted.seed
 
-        const result = await model.save()
+        const result = await manager.save(model)
 
         return Object.assign<Id<{}>, MnemonicKeyringModel>({ _id: result.id }, payload)
     }
@@ -57,7 +61,9 @@ export class SqliteConnector extends BaseConnector<string> {
      * @returns
      */
     async findByDid(did: string): Promise<Id<MnemonicKeyringModel> | undefined> {
-        const model = await Keyring.findOne({ where: { did: did }})
+        const manager = getManager(CONNECTION_NAME)
+
+        const model = await manager.findOne(Keyring, { where: { did: did }})
 
         if (model !== undefined) {
             const decrypted = await this.decryptModel(model)
