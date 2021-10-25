@@ -1,5 +1,5 @@
 {
-  "name": "@unid/wallet-sdk-sqlite-connector",
+  "name": "@getunid/wallet-sdk-sqlite-connector",
   "version": "0.0.8",
   "main": "libs/index.js",
   "types": "libs/index.d.ts",
@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "build": "npx tsc",
-    "release": "npx rimraf libs && npx yarn build && npx standard-version --commit-all --sign && npm publish",
+    "release": "npx rimraf libs && npx yarn build && npx standard-version --commit-all --sign && npm publish --access public",
     "ts-node": "npx ts-node --files -r tsconfig-paths/register",
     "test": "jest"
   },
@@ -26,7 +26,6 @@
   },
   "bin": {},
   "publishConfig": {
-    "registry": "https://npm-registry.getunid.io"
   },
   "dependencies": {
     "@unid/wallet-sdk-base-connector": "^0.0.10",
