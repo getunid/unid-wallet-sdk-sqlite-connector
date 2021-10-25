@@ -1,6 +1,6 @@
 {
   "name": "@getunid/wallet-sdk-sqlite-connector",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "libs/index.js",
   "types": "libs/index.d.ts",
   "author": "UNiD <>",
@@ -25,8 +25,7 @@
     "scripts": {}
   },
   "bin": {},
-  "publishConfig": {
-  },
+  "publishConfig": {},
   "dependencies": {
     "@unid/wallet-sdk-base-connector": "^0.0.10",
     "debug": "^4.3.1",
