@@ -1,6 +1,6 @@
 import { Column, Entity, ValueTransformer } from 'typeorm'
 import { Base } from './base'
-import { HexKeyPair } from '@unid/wallet-sdk-base-connector'
+import { HexKeyPair } from '@getunid/wallet-sdk-base-connector'
 
 const transformer: ValueTransformer = {
     from: (value) => {

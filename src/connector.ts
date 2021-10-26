@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { createConnection, getManager } from 'typeorm'
 import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions'
-import { BaseConnector, Id, MnemonicKeyringModel, UNiDInvalidDataError, UNiDNotImplementedError } from '@unid/wallet-sdk-base-connector'
+import { BaseConnector, Id, MnemonicKeyringModel, UNiDInvalidDataError, UNiDNotImplementedError } from '@getunid/wallet-sdk-base-connector'
 import { Keyring } from './entities/keyring'
 import { CONNECTION_NAME, getConfig } from './ormconfig'
 
