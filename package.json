@@ -27,7 +27,7 @@
   "bin": {},
   "publishConfig": {},
   "dependencies": {
-    "@getunid/wallet-sdk-base-connector": "^0.0.10",
+    "@getunid/wallet-sdk-base-connector": "^0.0.13",
     "debug": "^4.3.1",
     "sqlite3": "^5.0.2",
     "typeorm": "^0.2.36",
